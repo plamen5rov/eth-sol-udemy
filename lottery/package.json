@@ -9,7 +9,9 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "-": "^0.0.1",
     "@truffle/hdwallet-provider": "^1.5.1",
+    "create-react-app": "^5.0.1",
     "ganache-cli": "^6.12.2",
     "mocha": "^9.1.2",
     "solc": "^0.4.17",
