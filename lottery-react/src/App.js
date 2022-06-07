@@ -1,7 +1,10 @@
 import logo from './logo.svg';
 import './App.css';
+import web3 from './web3';
 
 function App() {
+  console.log(web3.version);
+  web3.eth.getAccounts().then(console.log);
   return (
     <div className="App">
       <header className="App-header">
@@ -9,6 +12,7 @@ function App() {
         <p>
           Edit <code>src/App.js</code> and save to reload.
         </p>
+        
         <a
           className="App-link"
           href="https://reactjs.org"
