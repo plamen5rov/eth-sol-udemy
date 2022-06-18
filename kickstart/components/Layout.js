@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Header from './Header';
 
 
 
@@ -6,9 +7,9 @@ import React, { Component } from "react";
 const Layout = (props) => {
     return (
         <div>
-            <h1>I am a Header</h1>
+            <Header />
             {props.children}
-            <h1>I am a Footer</h1>
+
 
         </div>
     );
