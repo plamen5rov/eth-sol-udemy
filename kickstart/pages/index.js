@@ -34,12 +34,12 @@ class CampaignIndex extends Component {
             />
                 <h3>Open Campaigns</h3>
                 {this.renderCampaigns()}
-                <Button
+                <Button style={{ marginTop: '20px' }}
                     content='Create Campaign'
                     icon='add circle'
                     primary
                 />
-            </div>;
+            </div>
         </Layout>
 
 
