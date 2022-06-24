@@ -5,14 +5,15 @@ import web3 from '../../../ethereum/web3';
 import { Link, Router } from '../../../routes';
 import Layout from "../../../components/Layout";
 
-//import factory from '../../ethereum/factory';
 
 class RequestNew extends Component {
 
     state = {
         value: '',
         description: '',
-        recipient: ''
+        recipient: '',
+        loading: false,
+        errorMessage: ''
     };
 
     static async getInitialProps(props) {
@@ -43,10 +44,7 @@ class RequestNew extends Component {
             ).send({ from: accounts[0] });
 
 
-
-
-
-            Router.pushRoute('/');
+            Router.pushRoute(`/campaigns/${this.props.address}/requests`);
 
         } catch (error) {
             this.setState({ errorMessage: error.message });
@@ -63,12 +61,12 @@ class RequestNew extends Component {
                 <div>
                     <h3 style={{ marginBottom: '20px' }}>Create New Request</h3>
                 </div>
+
                 <Form onSubmit={this.onSubmit} error={!!this.state.errorMessage}>
                     <Form.Field>
                         <label>Description</label>
                         <Input
-                            placeholder='Minimum Contribution (in wei)'
-                            label='wei' labelPosition="right"
+                            placeholder='What is this request for?'
                             value={this.state.description}
                             onChange={event =>
                                 this.setState({ description: event.target.value })}
@@ -77,7 +75,7 @@ class RequestNew extends Component {
                     <Form.Field>
                         <label>Value (ETH)</label>
                         <Input
-                            placeholder='Minimum Contribution (in wei)'
+                            placeholder='Request Cost (in wei)'
                             label='wei' labelPosition="right"
                             value={this.state.value}
                             onChange={event =>
@@ -87,8 +85,8 @@ class RequestNew extends Component {
                     <Form.Field>
                         <label>Recipient</label>
                         <Input
-                            placeholder='Minimum Contribution (in wei)'
-                            label='wei' labelPosition="right"
+                            placeholder='ETH address of the recepient of the request'
+                            label='ETH address' labelPosition="right"
                             value={this.state.recipient}
                             onChange={event =>
                                 this.setState({ recipient: event.target.value })}
@@ -97,6 +95,13 @@ class RequestNew extends Component {
                     <Message error header='Oops! Something went wrong!'
                         content={this.state.errorMessage} />
                     <Button loading={this.state.loading} primary>Create!</Button>
+                    <div>
+                        <Link route={`/campaigns/${this.props.address}/requests`}>
+                            <a>
+                                <Button primary style={{ float: 'right' }}>Back</Button>
+                            </a>
+                        </Link>
+                    </div>
                 </Form>
             </Layout >
 
