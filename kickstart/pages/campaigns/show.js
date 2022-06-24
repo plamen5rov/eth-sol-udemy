@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Layout from "../../components/Layout";
 import Campaign from "../../ethereum/campaign";
-import { Card, Grid, Button } from "semantic-ui-react";
+import { Card, Grid, Button, GridRow } from "semantic-ui-react";
 import web3 from '../../ethereum/web3';
 import ContributeForm from "../../components/ContributeForm";
 import { Link } from '../../routes';
@@ -39,7 +39,7 @@ class CampaignShow extends Component {
                 description:
                     'ETH address of the manager who created this campaign and as such is the only one authorized to withdraw money.',
                 meta: 'Manager Address',
-                style: { overflowWrap: 'break-word' }
+                style: { width: '84%' }
             },
             {
                 header: minimumContribution,
@@ -74,19 +74,22 @@ class CampaignShow extends Component {
             <Layout>
                 <h3>Campaign Details</h3>
                 <Grid>
-                    <Grid.Column width={10}>
-                        {this.renderCards()}
-                        <Link route={`/campaigns/${this.props.address}/requests`} >
-                            <a>
-                                <Button primary style={{ marginTop: '10px' }}>
-                                    View Requests
-                                </Button>
-                            </a>
-                        </Link>
-                    </Grid.Column>
-                    <Grid.Column width={6}>
-                        <ContributeForm address={this.props.address} />
-                    </Grid.Column>
+                    <GridRow>
+                        <Grid.Column width={10}>
+                            {this.renderCards()}
+                            <Link route={`/campaigns/${this.props.address}/requests`} >
+                                <a>
+                                    <Button primary style={{ marginTop: '15px' }}>
+                                        View Requests
+                                    </Button>
+                                </a>
+                            </Link>
+                        </Grid.Column>
+                        <Grid.Column width={6}>
+                            <ContributeForm address={this.props.address} />
+                        </Grid.Column>
+                    </GridRow>
+
                 </Grid>
 
 
