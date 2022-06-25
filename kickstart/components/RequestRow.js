@@ -1,10 +1,19 @@
 import React, { Component } from "react";
-import { Button, Form, Input, Message, Table } from "semantic-ui-react";
-import Campaign from "../ethereum/campaign";
+import { Button, Table } from "semantic-ui-react";
 import web3 from "../ethereum/web3";
-import { Router } from "../routes";
+import Campaign from "../ethereum/campaign";
+
 
 class RequestRow extends Component {
+
+    onApprove = async () => {
+        const campaign = Campaign(this.props.address);
+        const accounts = await web3.eth.getAccounts();
+        await campaign.methods
+            .approveRequest(this.props.id)
+            .send({ from: accounts[0] });
+    };
+
 
     render() {
         const { Row, Cell } = Table;
@@ -16,8 +25,8 @@ class RequestRow extends Component {
                 <Cell>{web3.utils.fromWei(request.value, "ether")}</Cell>
                 <Cell>{request.recipient}</Cell>
                 <Cell>{request.approvalCount}/{approversCount}</Cell>
-                <Cell>{request.description}</Cell>
-                <Cell>{request.description}</Cell>
+                <Cell><Button color="green" basic onClick={this.onApprove}>Approve</Button></Cell>
+                <Cell><Button color="red">Finalize</Button></Cell>
             </Row>
         )
     }
