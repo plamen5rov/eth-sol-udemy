@@ -16,6 +16,8 @@ class RequestIndex extends Component {
 
         const requestCount = await campaign.methods.getRequestsCount().call();
 
+        const approversCount = await campaign.methods.approversCount().call();
+
         const requests = await Promise.all(
             Array(parseInt(requestCount))
                 .fill()
@@ -26,7 +28,7 @@ class RequestIndex extends Component {
 
 
 
-        return { address, requests, requestCount };
+        return { address, requests, requestCount, approversCount };
     }
 
     renderRow() {
@@ -36,6 +38,7 @@ class RequestIndex extends Component {
                 id={index}
                 request={request}
                 address={this.props.address}
+                approversCount={this.props.approversCount}
             />
         })
     }
