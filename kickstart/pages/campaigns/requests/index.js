@@ -3,6 +3,7 @@ import { Button, Table, Label } from "semantic-ui-react";
 import { Link } from "../../../routes";
 import Layout from "../../../components/Layout";
 import Campaign from "../../../ethereum/campaign";
+import RequestRow from "../../../components/RequestRow";
 
 
 class RequestIndex extends Component {
@@ -28,6 +29,16 @@ class RequestIndex extends Component {
         return { address, requests, requestCount };
     }
 
+    renderRow() {
+        return this.props.requests.map((request, index) => {
+            return <RequestRow
+                key={index}
+                request={request}
+                address={this.props.address}
+            />
+        })
+    }
+
     render() {
         return (
             <Layout>
@@ -48,16 +59,7 @@ class RequestIndex extends Component {
                     </Table.Header>
 
                     <Table.Body>
-                        <Table.Row>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                            <Table.Cell>Cell</Table.Cell>
-                        </Table.Row>
-
+                        {this.renderRow()}
                     </Table.Body>
                 </Table>
                 <Link route={`/campaigns/${this.props.address}/requests/new`}>
