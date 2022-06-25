@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Button } from "semantic-ui-react";
+import { Button, Table, Label } from "semantic-ui-react";
 import { Link } from "../../../routes";
 import Layout from "../../../components/Layout";
 import Campaign from "../../../ethereum/campaign";
@@ -16,7 +16,7 @@ class RequestIndex extends Component {
         const requestCount = await campaign.methods.getRequestsCount().call();
 
         const requests = await Promise.all(
-            Array(requestCount)
+            Array(parseInt(requestCount))
                 .fill()
                 .map((element, index) => {
                     return campaign.methods.requests(index).call()
@@ -34,6 +34,32 @@ class RequestIndex extends Component {
                 <div>
                     <h3>Requests List</h3>
                 </div>
+                <Table celled>
+                    <Table.Header>
+                        <Table.Row>
+                            <Table.HeaderCell>ID</Table.HeaderCell>
+                            <Table.HeaderCell>Description</Table.HeaderCell>
+                            <Table.HeaderCell>Amount</Table.HeaderCell>
+                            <Table.HeaderCell>Recipient</Table.HeaderCell>
+                            <Table.HeaderCell>Approval Count</Table.HeaderCell>
+                            <Table.HeaderCell>Approve</Table.HeaderCell>
+                            <Table.HeaderCell>Finalize</Table.HeaderCell>
+                        </Table.Row>
+                    </Table.Header>
+
+                    <Table.Body>
+                        <Table.Row>
+                            <Table.Cell>Cell</Table.Cell>
+                            <Table.Cell>Cell</Table.Cell>
+                            <Table.Cell>Cell</Table.Cell>
+                            <Table.Cell>Cell</Table.Cell>
+                            <Table.Cell>Cell</Table.Cell>
+                            <Table.Cell>Cell</Table.Cell>
+                            <Table.Cell>Cell</Table.Cell>
+                        </Table.Row>
+
+                    </Table.Body>
+                </Table>
                 <Link route={`/campaigns/${this.props.address}/requests/new`}>
                     <a>
                         <Button primary>Add Request</Button>
